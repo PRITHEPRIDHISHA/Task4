@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Interactive Web Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+    body{background:#f9f9f9;color:#333;}
+    header,footer {
+      background:#4CAF50;color:white;text-align:center;
+      padding:20px;font-size:46px;font-weight:bold;
+      letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+    footer a { padding: 20px;}
+    nav{
+      display:flex;justify-content:center;gap:20px;
+      background:#222;padding:12px;position:sticky;top:0;z-index:10;
+    }
+    nav button{
+      background:#fff;border:none;padding:10px 20px;
+      border-radius:6px;cursor:pointer;font-weight:bold;
+      transition:0.3s;
+    }
+    nav button:hover{background:#4CAF50;color:#fff;}
+    nav button.active{background:#4CAF50;color:#fff;}
+    section{display:none;min-height:calc(100vh - 120px);padding:30px;}
+    section.active{display:block;animation:fade 0.4s;}
+    @keyframes fade{from{opacity:0;}to{opacity:1;}}
+    
+    /* Resume Styles */
+    .resume{
+      max-width:900px;margin:auto;background:#fff;
+      padding:30px;border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    }
+    .resume h1{font-size:45px;color:#4CAF50;margin-bottom:10px;border-bottom:2px solid #4CAF50;padding-bottom:5px;}
+    .resume p{margin:10px 0;font-size: 35px;}
+    .resume p a{padding: 20px;}
+    .resume h2{
+      margin-top:20px;margin-bottom:10px;
+    }
+    .resume ul{margin-left:20px;line-height:1.8;font-size: 35px;}
+
+    /* Shop Styles */
+    .shop-controls{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:20px;flex-wrap:wrap;gap:10px;
+    }
+    .shop-controls select{
+      padding:6px 10px;border-radius:6px;border:1px solid #ccc;
+    }
+    .shop-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+      gap:20px;
+    }
+    .product{
+      background:#fff;border-radius:10px;padding:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);text-align:center;
+      transition:transform 0.2s;
+    }
+    .product:hover{transform:translateY(-4px);}
+    .product img{
+      width:100%;height:220px;object-fit:cover;border-radius:8px;
+    }
+    .product h3{margin:10px 0 5px;font-size:18px;}
+    .product p{color:#555;margin-bottom:10px;}
+    .product button{
+      background:#4CAF50;color:#fff;border:none;
+      padding:8px 15px;border-radius:6px;cursor:pointer;
+      transition:0.3s;
+    }
+    .product button:hover{background:#388E3C;}
+    
+    /* Cart Drawer */
+    .cart-drawer{
+      position:fixed;top:0;right:-400px;width:350px;height:100%;
+      background:#fff;box-shadow:-2px 0 8px rgba(0,0,0,0.3);
+      transition:0.4s;z-index:20;display:flex;flex-direction:column;
+    }
+    .cart-drawer.active{right:0;}
+    .cart-header{
+      background:#4CAF50;color:#fff;padding:15px;
+      font-size:20px;display:flex;justify-content:space-between;align-items:center;
+    }
+    .cart-items{flex:1;overflow-y:auto;padding:10px;}
+    .cart-item{display:flex;align-items:center;gap:10px;
+      border-bottom:1px solid #eee;padding:10px 0;}
+    .cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px;}
+    .qty{display:flex;align-items:center;gap:5px;}
+    .qty button{padding:2px 6px;border:none;background:#ddd;cursor:pointer;border-radius:4px;}
+    .cart-footer{padding:15px;border-top:1px solid #ccc;}
+    .cart-footer button{width:100%;padding:10px;background:#4CAF50;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}
+    .cart-toggle{
+      position:fixed;bottom:20px;right:20px;background:#4CAF50;
+      color:#fff;border:none;border-radius:50%;width:60px;height:60px;
+      font-size:22px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:15;
+    }
+    .overlay{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.4);display:none;z-index:19;
+    }
+    .overlay.active{display:block;}
+  </style>
+</head>
+<body>
+  <header>Advanced Interactive Web Page</header>
+  <nav>
+    <button class="tab active" onclick="showSection('resume', this)">My Resume</button>
+    <button class="tab" onclick="showSection('shop', this)">Shopping</button>
+  </nav>
+
+ <section id="resume" class="active">
+    <div class="resume">
+      <header><h2>PRIDHISHA</h2>
+      <p><a href="">Email</a>|<a href="">Phone</a>|<a href="">Linkedin </a>|<a href="">Github</a></p></header>
+      <h1>Objective</h1>
+      <p>To secure a responsible career opportunity where I can fully utilize my skills and knowledge.</p>
+      <h1>Education</h1>
+      <ul>
+        <li>BCA - AKT MEMORIAL COLLEGE OF ENGINEERING AND TECHNOLOGY,NEELAMANGALAM (2020-2023)</li>
+        <li>HSC - Government Girls Higher Secondary School (2018-2020)</li>
+        <li>SSLC - Government Girls Higher Secondary School (2018-2020)</li>
+      </ul>
+      <h1>Skills</h1>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Python, SQL</li>
+        <li>Data Analytics</li>
+      </ul>
+      <h1>Internships</h1>
+      <ul>
+        <li><b>Apexplanet-</b>HTML, CSS, JavaScript</li>
+        <li><b>CISCO-Networking Academy-</b>Python, SQL</li>
+        <li><b>Great Learning-</b>Data Analytics</li>
+      </ul>
+      <h1>Certifications</h1>
+      <ul>
+       <li><b>Apexplanet-</b>HTML, CSS, JavaScript<a href="">-View</a></li>
+       <li><b>CISCO-Networking Academy-</b>Python, SQL<a href="">-View</a></li>
+       <li><b>Great Learning-</b>Data Analytics<a href="">-View</a></li>
+      </ul>
+      <h1>languages</h1>
+      <ul>
+        <li>English</li>
+        <li>Tamil</li>
+      </ul>
+      <h1>Projects</h1>
+      <ul>
+        <li>Portfolio Website</li>
+        <li>Shopping Web Application</li>
+      </ul>
+      <footer>
+        <a href="">📧</a>
+        <a href="">📞</a>
+        <a href="">🔗in</a>
+        <a href="">🌐</a>
+      </footer>
+    </div>
+  </section>
+
+  <!-- Shopping Section -->
+  <section id="shop">
+    <div class="shop-controls">
+      <h1>Dress Shop</h1>
+      <select id="filter" onchange="applyFilter()">
+        <option value="all">All</option>
+        <option value="casual">Casual</option>
+        <option value="party">Party</option>
+        <option value="formal">Formal</option>
+        <option value="traditional">Traditional</option>
+      </select>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </section>
+
+  <!-- Floating Cart Button -->
+  <button class="cart-toggle" onclick="toggleCart()">🛒</button>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <span>My Cart</span>
+      <button style="background:none;border:none;color:white;font-size:22px;cursor:pointer;" onclick="closeCart()">✖</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <p><strong>Total: ₹<span id="cartTotal">0</span></strong></p>
+      <button onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    // Toggle Sections
+    function showSection(id, btn){
+      document.querySelectorAll('section').forEach(sec=>sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // Products (all images now working)
+    const products = [
+  {id:1, name:"Red Summer Dress", price:1599, cat:"casual", img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"},
+  {id:2, name:"Blue Party Gown", price:2499, cat:"party", img:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"}, // replaced
+  {id:3, name:"Casual White Outfit", price:1299, cat:"casual", img:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"},
+  {id:4, name:"Black Formal Dress", price:1999, cat:"formal", img:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"},
+  {id:5, name:"Pink Floral Dress", price:1799, cat:"casual", img:"https://images.unsplash.com/photo-1523205771623-e0faa4d2813d"}, // replaced
+  {id:6, name:"Green Designer Gown", price:2899, cat:"party", img:"https://images.unsplash.com/photo-1523205771623-e0faa4d2813d"},
+  {id:7, name:"Yellow Casual Wear", price:1399, cat:"casual", img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"}, // replaced
+  {id:8, name:"Traditional Saree", price:3499, cat:"traditional", img:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"}, // replaced
+  {id:9, name:"Modern Kurti Set", price:1899, cat:"traditional", img:"https://images.unsplash.com/photo-1526045478516-99145907023c"},
+  {id:10, name:"Evening Black Dress", price:2299, cat:"formal", img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"} // replaced 
+  ];
+
+
+    let cart=[];
+    const shopGrid=document.getElementById('shopGrid');
+    const cartItems=document.getElementById('cartItems');
+    const cartTotal=document.getElementById('cartTotal');
+
+    function renderProducts(list){
+      shopGrid.innerHTML='';
+      list.forEach(p=>{
+        const div=document.createElement('div');
+        div.className="product";
+        div.innerHTML=`
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>₹${p.price}</p>
+          <button onclick="addToCart(${p.id})">Add to Cart</button>
+        `;
+        shopGrid.appendChild(div);
+      });
+    }
+    renderProducts(products);
+
+    function applyFilter(){
+      const val=document.getElementById('filter').value;
+      if(val==='all') renderProducts(products);
+      else renderProducts(products.filter(p=>p.cat===val));
+    }
+
+    function addToCart(id){
+      const item=products.find(p=>p.id===id);
+      const exist=cart.find(c=>c.id===id);
+      if(exist){exist.qty++;}
+      else{cart.push({...item,qty:1});}
+      updateCart();
+    }
+
+    function updateCart(){
+      cartItems.innerHTML='';
+      let total=0;
+      cart.forEach(it=>{
+        total+=it.price*it.qty;
+        const div=document.createElement('div');
+        div.className="cart-item";
+        div.innerHTML=`
+          <img src="${it.img}">
+          <div style="flex:1">
+            <div>${it.name}</div>
+            <div>₹${it.price}</div>
+          </div>
+          <div class="qty">
+            <button onclick="changeQty(${it.id},-1)">-</button>
+            <span>${it.qty}</span>
+            <button onclick="changeQty(${it.id},1)">+</button>
+          </div>
+        `;
+        cartItems.appendChild(div);
+      });
+      cartTotal.textContent=total;
+    }
+
+    function changeQty(id,delta){
+      const it=cart.find(c=>c.id===id);
+      if(!it)return;
+      it.qty+=delta;
+      if(it.qty<=0)cart=cart.filter(c=>c.id!==id);
+      updateCart();
+    }
+
+    function toggleCart(){
+      document.getElementById('cartDrawer').classList.add('active');
+      document.getElementById('overlay').classList.add('active');
+    }
+
+    function closeCart(){
+      document.getElementById('cartDrawer').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    function checkout(){
+      alert("Checkout - Total: ₹"+cart.reduce((s,i)=>s+i.price*i.qty,0));
+    }
+  </script>
+</body>
+</html>
